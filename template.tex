@@ -1,0 +1,70 @@
+\documentclass[11pt]{article}
+\usepackage[vcentering,dvips]{geometry}
+\geometry{papersize={96mm,56mm},total={90mm,50mm}}
+
+\usepackage{eso-pic}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{latexsym}
+\def\magyarOptions{defaults=hu-min}
+\usepackage[magyar]{babel}
+\usepackage{t1enc}
+\usepackage[utf8]{inputenc}
+\usepackage{palatino}
+\usepackage{helvet}
+\usepackage[usenames]{color}
+\usepackage{setspace}
+
+\definecolor{Bright}{rgb}{0.8,0.8,0.8}
+\definecolor{Dark}{rgb}{0,0.25,0.56}
+\definecolor{Golden}{rgb}{1,0.98,0.518}
+
+\pagestyle{empty}
+\setlength{\unitlength}{1in}
+\setlength{\topmargin}{-1.3in} % 1 inch is added to this value automatically
+\setlength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{-1in}
+\setlength{\hoffset}{0in}
+\setlength{\voffset}{0in}
+\setlength{\textwidth}{6.5in}
+
+\newcommand\BackgroundPic{
+  \put(0,0){
+    \parbox[b][\paperheight]{\paperwidth}{%
+      \vfill
+      \centering
+      \includegraphics[width=\paperwidth,height=\paperheight]{drupal_bg_noqr}%
+      \vfill}}}
+
+\begin{document}
+\AddToShipoutPicture{\BackgroundPic}
+
+{% for card in cards %}
+\makebox(3.3,1.8){
+  \begin{tabular}[c]{c}
+    \hspace{8.5mm}\LARGE\bf{ {{card.name|safe}} }\\
+    \hspace{8.5mm}\Large{ {{card.nick|safe}} }\\
+    \\
+    \begin{tabular}[c]{c}
+      \centering
+      \fontfamily{phv}\selectfont{
+        \textbf{
+          \textsc{
+            \scriptsize{
+            {% for role, active in card.roles %}{% if active %}\color{Dark}{% else %}\color{Bright}{% endif %}{ {{role}} }{% endfor %}
+            }
+          }
+        }
+      }
+    \end{tabular}
+    \\
+    \\
+    \begin{tabular}{p{3.3in}}
+      \hspace{.7cm}{{card.company|safe}}\\
+      \hspace{.7cm}\emph{ {{card.position|safe}} }\\
+    \end{tabular}
+  \end{tabular}
+}
+{% endfor %}
+
+\end{document}
