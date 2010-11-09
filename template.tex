@@ -41,10 +41,13 @@
 
 {% for card in cards %}
 \makebox(3.3,1.8){
+  \renewcommand\arraystretch{1.3}
   \begin{tabular}[c]{c}
-    \hspace{8.5mm}\LARGE\bf{ {{card.name|safe}} }\\
-    \hspace{8.5mm}\Large{ {{card.nick|safe}} }\\
-    \\
+    \hspace{8.5mm}
+    \LARGE\bf{ {{card.name|safe}} }\\
+    \hspace{8.5mm}
+    \Large{ {{card.nick|safe}} }\\
+    \renewcommand\arraystretch{3}
     \begin{tabular}[c]{c}
       \centering
       \fontfamily{phv}\selectfont{
@@ -58,7 +61,7 @@
       }
     \end{tabular}
     \\
-    \\
+    \renewcommand\arraystretch{1}
     \begin{tabular}{p{3.3in}}
       \hspace{.7cm}{{card.company|safe}}\\
       \hspace{.7cm}\emph{ {{card.position|safe}} }\\
